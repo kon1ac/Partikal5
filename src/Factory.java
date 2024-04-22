@@ -26,7 +26,6 @@ class SoftToyFactory {
         return false;
     }
 
-    // Функция для производства мягких игрушек
     public static void produceSoftToys(String toyType, int quantity) {
         System.out.println("Производим " + quantity + " " + toyType + "\n... Готово!");
     }
