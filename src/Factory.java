@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 class SoftToyFactory {
 
-    // Функция для расчета общей производственной мощности
     public static int calculateTotalProductionCapacity(int[] machineCapacities) {
         int totalCapacity = 0;
         for (int capacity : machineCapacities) {
@@ -11,7 +10,6 @@ class SoftToyFactory {
         return totalCapacity;
     }
 
-    // Функция для определения средней производительности на одного работника
     public static double calculateAverageWorkerProductivity(int totalProduction, int totalWorkers) {
         if (totalWorkers == 0) {
             return 0;
@@ -19,14 +17,13 @@ class SoftToyFactory {
         return (double) totalProduction / totalWorkers;
     }
 
-    // Функция для определения наличия неисправных машин на заводе
     public static boolean hasBrokenMachines(boolean[] machineStatus) {
         for (boolean status : machineStatus) {
             if (!status) {
-                return true; // Если есть хотя бы одна неисправная машина, возвращаем true
+                return true;
             }
         }
-        return false; // Если все машины работают исправно, возвращаем false
+        return false;
     }
 
     // Функция для производства мягких игрушек
