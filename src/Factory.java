@@ -1,44 +1,62 @@
-public class Factory {
-    // Статические функции
-    public static void produceItem(String item) {
-        System.out.println("Производство " + item);
-        // Здесь можно добавить код для производства товара
+import java.util.Scanner;
+
+class SoftToyFactory {
+
+    // Функция для расчета общей производственной мощности
+    public static int calculateTotalProductionCapacity(int[] machineCapacities) {
+        int totalCapacity = 0;
+        for (int capacity : machineCapacities) {
+            totalCapacity += capacity;
+        }
+        return totalCapacity;
     }
 
-    public static void calculateProductionCost(double rawMaterialCost, double laborCost) {
-        double totalCost = rawMaterialCost + laborCost;
-        System.out.println("Общая стоимость производства: $" + totalCost);
+    // Функция для определения средней производительности на одного работника
+    public static double calculateAverageWorkerProductivity(int totalProduction, int totalWorkers) {
+        if (totalWorkers == 0) {
+            return 0;
+        }
+        return (double) totalProduction / totalWorkers;
     }
 
-    public static void shipItem(String item, String destination) {
-        System.out.println("Отгрузка " + item + " в " + destination);
-        // Здесь можно добавить код для отгрузки товара
+    // Функция для определения наличия неисправных машин на заводе
+    public static boolean hasBrokenMachines(boolean[] machineStatus) {
+        for (boolean status : machineStatus) {
+            if (!status) {
+                return true; // Если есть хотя бы одна неисправная машина, возвращаем true
+            }
+        }
+        return false; // Если все машины работают исправно, возвращаем false
     }
 
-    // Динамические функции, связанные с программным обеспечением
-    public void optimizeProductionSchedule() {
-        System.out.println("Оптимизация расписания производства");
-        // Здесь можно добавить код для оптимизации расписания производства
+    // Функция для производства мягких игрушек
+    public static void produceSoftToys(String toyType, int quantity) {
+        System.out.println("Производим " + quantity + " " + toyType + "\n... Готово!");
     }
 
-    public void trackInventory() {
-        System.out.println("Отслеживание инвентаря");
-        // Здесь можно добавить код для отслеживания инвентаря
-    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-    public void analyzeProductionData() {
-        System.out.println("Анализ данных о производстве");
-        // Здесь можно добавить код для анализа данных о производстве
-    }
+        int[] machineCapacities = {100, 150, 200, 80};
+        int totalCapacity = calculateTotalProductionCapacity(machineCapacities);
+        System.out.println("Общая производственная мощность: " + totalCapacity);
 
-    // Функции, относящиеся к ответвлению от стандартных функций
-    public void notifyMaintenanceTeam() {
-        System.out.println("Уведомление команды по обслуживанию");
-        // Здесь можно добавить код для уведомления команды по обслуживанию
-    }
+        int totalWorkers = 50;
+        double averageProductivity = calculateAverageWorkerProductivity(totalCapacity, totalWorkers);
+        System.out.println("Средняя производительность на одного работника: " + averageProductivity);
 
-    public void escalateProductionIssue() {
-        System.out.println("Эскалация проблемы в производстве");
-        // Здесь можно добавить код для эскалации проблемы в производстве
+        boolean[] machineStatus = {true, true, false, true};
+        boolean hasBroken = hasBrokenMachines(machineStatus);
+        System.out.println("Есть ли неисправные машины на заводе? " + (hasBroken ? "Да" : "Нет"));
+
+        System.out.println("Выберите тип мягкой игрушки (медведь, дракончик, жираф): ");
+        String toyType = scanner.nextLine();
+
+        System.out.println("Введите количество производимых игрушек: ");
+        int quantity = scanner.nextInt();
+
+        produceSoftToys(toyType, quantity);
+
+        scanner.close();
     }
 }
